@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Properties & Sales - CRM</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+<h1>Property Inventory & Sales</h1>
+
+<h3>Add Property</h3>
+<input id="propertyName" placeholder="Property Name">
+<input id="propertyPrice" placeholder="Price">
+<button onclick="addProperty()">Add Property</button>
+<div id="propertyList"></div>
+
+<h3>Record Property Sale</h3>
+<select id="propertySelect"></select>
+<select id="agentSelect"></select>
+<button onclick="recordSale()">Record Sale</button>
+
+<nav><a href="index.html">Dashboard</a> | <a href="employees.html">Employees</a></nav>
+
+<script src="js/main.js"></script>
+<script src="js/properties.js"></script>
+</body>
+</html>
