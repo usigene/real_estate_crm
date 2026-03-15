@@ -1,31 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Employees - Real Estate CRM</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="lib/xlsx.full.min.js"></script>
-<script src="lib/mammoth.browser.min.js"></script>
+    <title>Employee Management</title>
 </head>
 <body>
+    <h1>Employee List</h1>
+    <div class="upload-zone">
+        <h2>Drag and Drop Upload Zone</h2>
+        <p>Drag your files here to upload</p>
+        <input type="file" id="fileUpload" multiple accept="*/*" style="display:none;" />
+    </div>
+    <script>
+        const dropArea = document.querySelector('.upload-zone');
 
-<div class="container">
-<h1>Employees</h1>
+        dropArea.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropArea.classList.add('active');
+        });
 
-<div class="upload">
-  <h3>Upload Excel (.xlsx)</h3>
-  <input type="file" id="excelFile">
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.classList.remove('active');
+        });
 
-  <h3>Upload Word (.docx)</h3>
-  <input type="file" id="wordFile">
-</div>
-
-<input id="searchStaff" placeholder="Search staff...">
-<div id="staffList"></div>
-
-<nav><a href="index.html">Dashboard</a> | <a href="properties.html">Properties & Sales</a></nav>
-
-<script src="js/main.js"></script>
-<script src="js/employees.js"></script>
+        dropArea.addEventListener('drop', (event) => {
+            event.preventDefault();
+            const files = event.dataTransfer.files;
+            console.log(files);
+            // Further processing of files (uploading, etc.)
+        });
+    </script>
 </body>
 </html>
