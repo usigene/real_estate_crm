@@ -2,33 +2,193 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Real Estate CRM</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate CRM Pro - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Real Estate CRM</h1>
-        <button id="adminLoginBtn">Admin Login</button>
-    </header>
-    <main>
-        <section id="listings">
-            <h2>Property Listings</h2>
-            <!-- Listings will be populated here -->
-        </section>
-        <section id="adminLoginModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Admin Login</h2>
-                <form id="adminLoginForm">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                    <button type="submit">Login</button>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <i class="fas fa-building"></i>
+            <span>Real Estate CRM Pro</span>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="#" onclick="showPage('dashboard')" class="active">Dashboard</a></li>
+            <li><a href="#" onclick="showPage('employees')">Employees</a></li>
+            <li><a href="#" onclick="showPage('properties')">Properties</a></li>
+            <li><a href="#" onclick="showPage('sales')">Sales</a></li>
+            <li><a href="#" onclick="showAdmin()" class="admin-btn">Admin</a></li>
+        </ul>
+    </nav>
+
+    <!-- DASHBOARD PAGE -->
+    <div id="dashboard" class="page active">
+        <div class="container">
+            <h1>📊 Dashboard</h1>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Total Staff</h3>
+                    <p id="staffCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Active Agents</h3>
+                    <p id="agentCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-home"></i>
+                    <h3>Properties</h3>
+                    <p id="propertyCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-money-bill"></i>
+                    <h3>Total Commission</h3>
+                    <p id="commissionTotal">₦0</p>
+                </div>
+            </div>
+
+            <div class="charts-section">
+                <div class="chart-box">
+                    <h2>Agent Performance</h2>
+                    <canvas id="agentChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h2>Sales This Month</h2>
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+
+            <div class="leaderboard">
+                <h2>🏆 Top Performers</h2>
+                <div id="leaderboard"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EMPLOYEES PAGE -->
+    <div id="employees" class="page">
+        <div class="container">
+            <h1>👥 Employee Management</h1>
+            
+            <div class="upload-section">
+                <div class="drop-zone" id="dropZone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Drag & Drop Files</h3>
+                    <p>Excel or Word files</p>
+                </div>
+            </div>
+
+            <input type="text" id="searchStaff" class="search-box" placeholder="🔍 Search employees...">
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Department</th>
+                        <th>Commission</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="staffList"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- PROPERTIES PAGE -->
+    <div id="properties" class="page">
+        <div class="container">
+            <h1>🏠 Property Management</h1>
+            
+            <div class="form-section">
+                <h2>Add New Property</h2>
+                <form id="propertyForm" class="form-grid">
+                    <input type="text" id="propName" placeholder="Property Name" required>
+                    <input type="number" id="propPrice" placeholder="Price (₦)" required>
+                    <input type="text" id="propLocation" placeholder="Location" required>
+                    <select id="propType" required>
+                        <option>Select Type</option>
+                        <option>Residential</option>
+                        <option>Commercial</option>
+                        <option>Land</option>
+                    </select>
+                    <button type="submit">➕ Add Property</button>
                 </form>
             </div>
-        </section>
-    </main>
-    <script src="script.js"></script>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="propertyList"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- SALES PAGE -->
+    <div id="sales" class="page">
+        <div class="container">
+            <h1>💼 Sales Management</h1>
+            
+            <div class="form-section">
+                <h2>Record New Sale</h2>
+                <form id="saleForm" class="form-grid">
+                    <select id="saleProperty" required>
+                        <option>Select Property</option>
+                    </select>
+                    <select id="saleAgent" required>
+                        <option>Select Agent</option>
+                    </select>
+                    <input type="date" id="saleDate" required>
+                    <button type="submit">💾 Record Sale</button>
+                </form>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Agent</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Commission</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="salesList"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ADMIN MODAL -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdmin()">&times;</span>
+            <h2>🔐 Admin Login</h2>
+            <form onsubmit="adminLogin(event)">
+                <input type="text" id="adminUser" placeholder="Username" required>
+                <input type="password" id="adminPass" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p class="hint">Demo: admin / admin123</p>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
