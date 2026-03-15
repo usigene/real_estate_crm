@@ -1,79 +1,36 @@
+/* Modern styling for real estate CRM */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: 'Arial', sans-serif;
+    width: 80%;
+    margin: 0 auto;
 }
 
-.header {
-  background: #4CAF50;
-  color: white;
-  padding: 10px 0;
-  text-align: center;
-  font-size: 2em;
-}
-
-.admin-login {
-  background: #f4f4f4;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-}
-
-.admin-login h2 {
-  margin-bottom: 20px;
-}
-
-.admin-login input[type='text'],
-.admin-login input[type='password'] {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.admin-login button {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px;
-  width: 100%;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.admin-login button:hover {
-  background: #45a049;
+.admin-login-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
 }
 
 .drag-drop-upload {
-  border: 2px dashed #4CAF50;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  transition: background-color 0.3s;
+    border: 2px dashed #007bff;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
-.drag-drop-upload:hover {
-  background-color: #e9f5e9;
-  cursor: pointer;
-}
-
-.drag-drop-upload p {
-  color: #555;
-  font-size: 1.2em;
-}
-
-.drag-drop-upload input[type='file'] {
-  display: none;
-}
-
-.drag-drop-upload label {
-  background: #4CAF50;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
+.drag-drop-upload.hover {
+    background-color: #f0f8ff;
 }
